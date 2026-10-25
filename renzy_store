@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Renzy Store - Jasa Followers, Likes & Views</title>
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * { box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background-color: #f3f6fa; margin: 0; padding-bottom: 90px; color: #1e293b; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* NAVBAR */
+        .navbar {
+            background: #ffffff;
+            border-bottom: 1px solid #e2e8f0;
+            position: sticky;
+            top: 0;
+            z-index: 30;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo-box {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .logo-img {
+            width: 36px;
+            height: 36px;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+        
+        /* HEADER BUTTONS */
+        .btn-ketentuan {
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            color: #334155;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 9999px;
+            cursor: pointer;
+        }
+        .btn-gear {
+            width: 32px;
+            height: 32px;
+            background: #f1f5f9;
+            border: none;
+            border-radius: 9999px;
+            color: #475569;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* HERO */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #ecfdf5;
+            color: #047857;
+            border: 1px solid #a7f3d0;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 9999px;
+        }
+        .dot-green {
+            width: 8px;
+            height: 8px;
+            background: #10b981;
+            border-radius: 50%;
+        }
+        .hero-title {
+            font-size: 24px;
+            font-weight: 800;
+            color: #0f172a;
+            line-height: 1.25;
+            margin: 10px 0 6px 0;
+            letter-spacing: -0.5px;
+        }
+        .hero-sub {
+            font-size: 12px;
+            color: #64748b;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* 4 KOTAK LANGKAH */
+        .steps-container {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            margin-top: 16px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+        }
+        .step-box {
+            padding: 14px;
+            border-right: 1px solid #f1f5f9;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .step-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #0f172a;
+            margin: 0 0 2px 0;
+        }
+        .step-desc {
+            font-size: 10px;
+            color: #94a3b8;
+            margin: 0;
+            line-height: 1.3;
+        }
+
+        /* FILTER CHIP PILL */
+        .chip-pill {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 9999px;
+            padding: 8px 16px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #334155;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+            cursor: pointer;
+        }
+        
+        /* TOMBOL MODE AKTIF */
+        .chip-mode-reguler {
+            background-color: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-radius: 9999px;
+            padding: 6px 6px 6px 14px;
+            font-size: 13px;
+            font-weight: 700;
+            color: #1e40af;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+        .chip-mode-premium {
+            background-color: #f3e8ff;
+            border: 1px solid #d8b4fe;
+            border-radius: 9999px;
+            padding: 6px 6px 6px 14px;
+            font-size: 13px;
+            font-weight: 700;
+            color: #6b21a8;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+        .badge-ganti {
+            background-color: #292524;
+            color: #ffffff;
+            border-radius: 9999px;
+            padding: 4px 12px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- POPUP SALURAN WHATSAPP -->
+    <div id="welcomeModal" style="position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); display: flex; align-items: flex-end; justify-content: center; z-index: 80; padding: 0;">
+        <div style="background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%); width: 100%; max-width: 448px; border-top-left-radius: 24px; border-top-right-radius: 24px; padding: 20px; box-shadow: 0 -10px 25px rgba(0,0,0,0.1); border-top: 2px solid #bbf7d0;">
+            
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                <div>
+                    <span id="welcomeBadge" style="font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 6px; display: inline-block; margin-bottom: 6px; background: #dcfce7; color: #15803d;">
+                        📌 Bergabung Sekarang
+                    </span>
+                    <h3 style="font-size: 16px; font-weight: 800; margin: 0; color: #0f172a;">Info Renzy Store</h3>
+                </div>
+                <button onclick="closeWelcomeModal()" style="background: #f1f5f9; border: none; width: 28px; height: 28px; border-radius: 50%; font-size: 14px; color: #64748b; cursor: pointer;">✕</button>
+            </div>
+
+            <p style="font-size: 12px; color: #475569; margin: 0 0 16px 0; line-height: 1.5;">
+                Dapatkan info eksklusif, info terbaru, dan diskon menarik tiap hari dengan bergabung ke saluran resmi kami!
+            </p>
+
+            <div style="background: rgba(255, 255, 255, 0.8); border: 1px solid #d1fae5; border-radius: 14px; padding: 12px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <div style="width: 36px; height: 36px; background: #dcfce7; color: #16a34a; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px;">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </div>
+                    <div>
+                        <div style="font-size: 13px; font-weight: 800; color: #0f172a;">Saluran Renzy Store</div>
+                        <div style="font-size: 10px; color: #64748b;">Info terbaru & update layanan tiap hari</div>
+                    </div>
+                </div>
+                <a href="https://whatsapp.com/channel/0029Vb95QJjEquiH4O7jnx32" target="_blank" onclick="closeWelcomeModal()" style="background: #10b981; color: white; text-decoration: none; font-size: 12px; font-weight: 700; padding: 6px 14px; border-radius: 9999px; box-shadow: 0 2px 4px rgba(16, 185, 129, 0.3);">
+                    Join
+                </a>
+            </div>
+
+            <button onclick="closeWelcomeModal()" style="width: 100%; background: transparent; border: none; font-size: 12px; font-weight: 600; color: #64748b; padding: 8px; cursor: pointer;">
+                Lewati, langsung ke toko →
+            </button>
+        </div>
+    </div>
+
+    <!-- POPUP PILIH TIPE LAYANAN -->
+    <div id="modeModal" style="position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); display: none; align-items: flex-end; justify-content: center; z-index: 80; padding: 0;">
+        <div style="background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%); width: 100%; max-width: 448px; border-top-left-radius: 24px; border-top-right-radius: 24px; padding: 20px; box-shadow: 0 -10px 25px rgba(0,0,0,0.1); border-top: 2px solid #bbf7d0;">
+            
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e2e8f0; padding-bottom: 12px; margin-bottom: 16px;">
+                <div>
+                    <span id="modeModalSpan" style="font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 6px; display: inline-block; margin-bottom: 4px; background: #dcfce7; color: #15803d;">
+                        ⚡ Langkah 1 dari 2
+                    </span>
+                    <h3 style="font-size: 15px; font-weight: 800; margin: 0; color: #0f172a;">Pilih Tipe Layanan</h3>
+                    <p style="font-size: 11px; color: #475569; margin: 2px 0 0 0;">Pilih Reguler untuk standar atau Premium untuk kualitas tinggi.</p>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                <div onclick="selectMode('Reguler')" style="border: 2px solid #2563eb; border-radius: 16px; padding: 14px; cursor: pointer; background: #eff6ff; transition: all 0.2s;">
+                    <div style="font-size: 20px; margin-bottom: 6px;">⚡</div>
+                    <h4 style="font-size: 14px; font-weight: 800; color: #1e40af; margin: 0 0 6px 0;">Reguler</h4>
+                    <ul style="padding-left: 14px; margin: 0; font-size: 10px; color: #1d4ed8; line-height: 1.5;">
+                        <li>Kualitas Normal</li>
+                        <li>Harga Lebih Terjangkau</li>
+                        <li>Proses Lebih Cepat</li>
+                    </ul>
+                    <button style="width: 100%; margin-top: 12px; background: #2563eb; color: white; border: none; padding: 8px; border-radius: 10px; font-size: 11px; font-weight: 700;">Pilih Reguler</button>
+                </div>
+
+                <div onclick="selectMode('Premium')" style="border: 2px solid #A02CC9; border-radius: 16px; padding: 14px; cursor: pointer; background: #f3e8ff; position: relative; transition: all 0.2s;">
+                    <span style="position: absolute; top: -8px; right: 10px; background: #A02CC9; color: white; font-size: 8px; font-weight: 800; padding: 2px 6px; border-radius: 6px;">Rekomendasi</span>
+                    <div style="font-size: 20px; margin-bottom: 6px;">👑</div>
+                    <h4 style="font-size: 14px; font-weight: 800; color: #6b21a8; margin: 0 0 6px 0;">Premium</h4>
+                    <ul style="padding-left: 14px; margin: 0; font-size: 10px; color: #7e22ce; line-height: 1.5;">
+                        <li>Server Pusat Terbaik</li>
+                        <li>Kualitas Lebih Bagus</li>
+                        <li>Bergaransi Permanen</li>
+                    </ul>
+                    <button style="width: 100%; margin-top: 12px; background: #A02CC9; color: white; border: none; padding: 8px; border-radius: 10px; font-size: 11px; font-weight: 700;">Pilih Premium</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NAVBAR -->
+    <div class="navbar">
+        <div style="max-width: 448px; margin: 0 auto; width: 100%; display: flex; justify-content: space-between; align-items: center;">
+            <div class="logo-box">
+                <img src="https://cdn.phototourl.com/member/2026-10-25-c5fc1428-2b63-452d-a67c-15ba3a792db1.png" alt="Logo Renzy Store" class="logo-img">
+                <span id="logoText" class="logo-text" style="font-size: 20px; font-weight: 800; letter-spacing: -0.5px;">Renzy Store</span>
+            </div>
+            
+            <div style="display: flex; gap: 6px; align-items: center;">
+                <button id="btnAi" class="btn-ai" onclick="toggleAiModal()" style="color: #ffffff; font-size: 12px; font-weight: 700; padding: 6px 14px; border-radius: 9999px; border: none; display: inline-flex; align-items: center; gap: 6px; cursor: pointer;">
+                    <i class="fa-solid fa-robot"></i> Tanya AI
+                </button>
+                <button class="btn-ketentuan" onclick="alert('Ketentuan:\n- Minimal order Rp1.000\n- Proses 1x24 jam tergantung kondisi server\n- Metode Pembayaran: QRIS, DANA, GoPay, OVO, SeaBank')">
+                    Ketentuan
+                </button>
+                <button class="btn-gear" onclick="toggleAdminModal()">
+                    <i class="fa-solid fa-gear"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div style="max-width: 448px; margin: 0 auto; padding: 16px;">
+
+        <!-- STATUS HERO -->
+        <div>
+            <div class="status-badge">
+                <span class="dot-green"></span> Layanan aktif
+            </div>
+            <h1 class="hero-title">Naikin followers, likes, dan views dalam 1×24 jam tergantung kondisi server.</h1>
+            <p class="hero-sub">Untuk TikTok, Instagram, WhatsApp, dan Telegram. Pembayaran via QRIS, DANA, GoPay, OVO, & SeaBank. Minimal order Rp1.000.</p>
+        </div>
+
+        <!-- 4 LANGKAH PESAN -->
+        <div class="steps-container">
+            <div class="step-box">
+                <div id="stepNum1" class="step-number" style="width: 24px; height: 24px; color: #ffffff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; margin-bottom: 6px;">1</div>
+                <h3 class="step-title">Pilih layanan</h3>
+                <p class="step-desc">Pilih tipe, isi jumlah, masukkan ke keranjang.</p>
+            </div>
+            <div class="step-box" style="border-right: none;">
+                <div id="stepNum2" class="step-number" style="width: 24px; height: 24px; color: #ffffff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; margin-bottom: 6px;">2</div>
+                <h3 class="step-title">Salin teks pesanan</h3>
+                <p class="step-desc">Teks pesanan untuk admin disalin sendiri.</p>
+            </div>
+            <div class="step-box" style="border-bottom: none;">
+                <div id="stepNum3" class="step-number" style="width: 24px; height: 24px; color: #ffffff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; margin-bottom: 6px;">3</div>
+                <h3 class="step-title">Pilih pembayaran</h3>
+                <p class="step-desc">Bayar via QRIS, DANA, GoPay, OVO, atau SeaBank.</p>
+            </div>
+            <div class="step-box" style="border-right: none; border-bottom: none;">
+                <div id="stepNum4" class="step-number" style="width: 24px; height: 24px; color: #ffffff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; margin-bottom: 6px;">4</div>
+                <h3 class="step-title">Kirim bukti</h3>
+                <p class="step-desc">Kirim pesan dan bukti transfer ke admin WhatsApp.</p>
+            </div>
+        </div>
+
+        <!-- FILTER PLATFORM & MODE -->
+        <div style="margin-top: 20px;">
+            <h2 style="font-size: 18px; font-weight: 800; color: #0f172a; margin: 0 0 12px 0;">Pilih layanan</h2>
+            
+            <div class="no-scrollbar" style="display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px;">
+                <button id="modeButton" class="chip-mode-reguler" onclick="openModeModal()">
+                    ⚡ Mode Reguler <span class="badge-ganti">Ganti</span>
+                </button>
+                <button id="chipTikTok" class="chip-pill active" onclick="filterCategory('TikTok', this)">
+                    <img src="https://cdn.phototourl.com/member/2026-10-25-fb6aff63-1e41-4620-a9a5-4d5e4ff63852.jpg" alt="TikTok" style="width: 16px; height: 16px; object-fit: contain; border-radius: 50%;"> TikTok
+                </button>
+                <button id="chipIG" class="chip-pill" onclick="filterCategory('Instagram', this)">
+                    <img src="https://cdn.phototourl.com/member/2026-10-25-088e6b7f-49f5-432d-9486-b29549e04e7d.jpg" alt="Instagram" style="width: 16px; height: 16px; object-fit: contain; border-radius: 50%;"> Instagram
+                </button>
+                <button id="chipWA" class="chip-pill" onclick="filterCategory('WhatsApp', this)">
+                    <img src="https://cdn.phototourl.com/member/2026-10-25-f6140907-34f1-4dcd-9ff7-37af67c3623a.jpg" alt="WhatsApp" style="width: 16px; height: 16px; object-fit: contain; border-radius: 50%;"> WhatsApp
+                </button>
+                <button id="chipTele" class="chip-pill" onclick="filterCategory('Telegram', this)">
+                    <img src="https://cdn.phototourl.com/member/2026-10-25-25cdab83-7ff5-45fa-be9a-ec175eb4787d.jpg" alt="Telegram" style="width: 16px; height: 16px; object-fit: contain; border-radius: 50%;"> Telegram
+                </button>
+            </div>
+            
+            <div id="serviceCountText" style="font-size: 12px; color: #94a3b8; margin-top: 8px; font-weight: 500;">
+                10 layanan tersedia
+            </div>
+        </div>
+
+        <!-- DAFTAR LAYANAN -->
+        <div id="servicesList" style="margin-top: 12px;"></div>
+
+    </div>
+
+    <!-- FLOATING WA BUTTON -->
+    <a href="https://api.whatsapp.com/send?phone=6283842227858" target="_blank" style="position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px; background: #10b981; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4); text-decoration: none; z-index: 20;">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- FLOATING CART ICON WITH BADGE -->
+    <button id="cartFloatBtn" onclick="toggleCartDrawer()" style="position: fixed; bottom: 20px; right: 80px; width: 44px; height: 44px; background: white; border: 1px solid #e2e8f0; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); z-index: 20; cursor: pointer;">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span id="cartBadge" style="position: absolute; top: -4px; right: -4px; background: #ef4444; color: white; font-size: 9px; font-weight: 800; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; display: none;">0</span>
+    </button>
+
+    <!-- DRAWER / POPUP KERANJANG BELANJA -->
+    <div id="cartDrawerOverlay" style="position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); display: none; z-index: 85;"></div>
+    <div id="cartDrawer" style="position: fixed; top: 0; right: -100%; width: 100%; max-width: 380px; height: 100vh; background: #ffffff; z-index: 90; display: flex; flex-direction: column; box-shadow: -5px 0 25px rgba(0,0,0,0.1); transition: right 0.3s ease-in-out;">
+        
+        <!-- Header Drawer -->
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; border-bottom: 1px solid #f1f5f9;">
+            <div style="display: flex; gap: 10px; align-items: center;">
+                <div id="drawerIconBox" style="position: relative; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px;">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span id="drawerBadgeMini" style="position: absolute; top: -2px; right: -2px; background: #ef4444; color: white; font-size: 8px; width: 14px; height: 14px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; display: none;">0</span>
+                </div>
+                <div>
+                    <h3 style="font-size: 15px; font-weight: 800; margin: 0; color: #0f172a;">Keranjang</h3>
+                    <span id="drawerItemCount" style="font-size: 11px; color: #64748b;">0 layanan dipilih</span>
+                </div>
+            </div>
+            <button onclick="toggleCartDrawer()" style="background: #f1f5f9; border: none; width: 32px; height: 32px; border-radius: 50%; font-size: 14px; color: #64748b; cursor: pointer; display: flex; align-items: center; justify-content: center;">✕</button>
+        </div>
+
+        <!-- List Item Keranjang -->
+        <div id="cartItemsList" style="flex: 1; overflow-y: auto; padding: 16px 20px; display: flex; flex-direction: column; gap: 14px;">
+            <!-- Diisi otomatis via JS -->
+        </div>
+
+        <!-- Footer Drawer -->
+        <div style="border-top: 1px solid #f1f5f9; padding: 16px 20px; display: flex; flex-direction: column; gap: 12px; background: #ffffff;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-size: 13px; font-weight: 700; color: #64748b;">Total</span>
+                <span id="cartTotalPrice" style="font-size: 20px; font-weight: 800; color: #0f172a;">Rp 0</span>
+            </div>
+            <button id="checkoutBtn" onclick="checkoutCart()" style="width: 100%; color: white; font-size: 14px; font-weight: 800; padding: 14px; border-radius: 12px; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                Bayar sekarang <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- MODAL TANYA AI -->
+    <div id="aiModal" style="position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); display: none; align-items: flex-end; justify-content: center; z-index: 95; padding: 0;">
+        <div style="background: #ffffff; width: 100%; max-width: 448px; border-top-left-radius: 24px; border-top-right-radius: 24px; padding: 20px; max-height: 85vh; display: flex; flex-direction: column; box-shadow: 0 -10px 25px rgba(0,0,0,0.1);">
+            
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f1f5f9; padding-bottom: 12px;">
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <div id="aiModalIconBox" style="width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px;">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 14px; font-weight: 800; margin: 0; color: #0f172a;">Asisten AI Renzy Store</h3>
+                        <span style="font-size: 10px; color: #10b981; font-weight: 600;">● Online siap membantu</span>
+                    </div>
+                </div>
+                <button onclick="toggleAiModal()" style="background: #f1f5f9; border: none; width: 28px; height: 28px; border-radius: 50%; font-size: 14px; color: #64748b; cursor: pointer;">✕</button>
+            </div>
+
+            <!-- Chat Container -->
+            <div id="aiChatBox" style="flex: 1; overflow-y: auto; padding: 12px 0; max-height: 320px; min-height: 200px; display: flex; flex-direction: column; gap: 10px;">
+                <div style="background: #f1f5f9; padding: 10px 14px; border-radius: 14px; font-size: 12px; color: #334155; max-width: 85%; align-self: flex-start;">
+                    Halo! Saya asisten AI Renzy Store. Ada yang bisa saya bantu seputar layanan Reguler, Premium, atau keranjang belanja?
+                </div>
+            </div>
+
+            <!-- Input Chat -->
+            <div style="display: flex; gap: 8px; border-top: 1px solid #f1f5f9; padding-top: 12px;">
+                <input type="text" id="aiInput" placeholder="Ketik pertanyaan..." style="flex: 1; border: 1px solid #cbd5e1; padding: 10px 14px; border-radius: 12px; font-size: 12px; outline: none;" onkeypress="handleAiEnter(event)">
+                <button id="aiSendBtn" onclick="sendAiMessage()" style="color: white; border: none; padding: 0 16px; border-radius: 12px; font-weight: 700; cursor: pointer; font-size: 12px;">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL ORDER & KALKULATOR -->
+    <div id="orderModal" style="position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); display: none; align-items: flex-end; justify-content: center; z-index: 50; padding: 0;">
+        <div style="background: #ffffff; width: 100%; max-width: 448px; border-top-left-radius: 24px; border-top-right-radius: 24px; padding: 20px; max-height: 90vh; overflow-y: auto; box-shadow: 0 -10px 25px rgba(0,0,0,0.1);">
+            
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 1px solid #f1f5f9; padding-bottom: 12px;">
+                <div style="display: flex; gap: 12px; align-items: center;">
+                    <div id="modalIconContainer" style="width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; overflow: hidden;">🎵</div>
+                    <div>
+                        <h3 id="modalTitle" style="font-size: 14px; font-weight: 800; margin: 0; color: #0f172a;">Followers TikTok Luar</h3>
+                        <span id="modalRate" style="font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-top: 4px;">
+                            Rp 800 / 10 followers
+                        </span>
+                    </div>
+                </div>
+                <button onclick="closeModal()" style="background: #f1f5f9; border: none; width: 28px; height: 28px; border-radius: 50%; font-size: 14px; color: #64748b; cursor: pointer;">✕</button>
+            </div>
+
+            <div style="margin-top: 16px; display: flex; flex-direction: column; gap: 14px;">
+                <div>
+                    <label style="font-size: 12px; font-weight: 700; color: #334155; display: block; margin-bottom: 8px;">Pilihan cepat</label>
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;">
+                        <button onclick="setQuantity(50)" id="presetBtn50" style="padding: 8px; border-radius: 12px; text-align: center; cursor: pointer;">
+                            <div style="font-size: 13px; font-weight: 800; color: #1e293b;">50</div>
+                            <div id="preset50" style="font-size: 9px; font-weight: 700; color: #1e293b;">Rp 0</div>
+                        </button>
+                        <button onclick="setQuantity(100)" id="presetBtn100" style="background: #ffffff; border: 1px solid #e2e8f0; padding: 8px; border-radius: 12px; text-align: center; cursor: pointer;">
+                            <div style="font-size: 13px; font-weight: 800; color: #1e293b;">100</div>
+                            <div id="preset100" style="font-size: 9px; font-weight: 700; color: #1e293b;">Rp 0</div>
+                        </button>
+                        <button onclick="setQuantity(200)" id="presetBtn200" style="background: #ffffff; border: 1px solid #e2e8f0; padding: 8px; border-radius: 12px; text-align: center; cursor: pointer;">
+                            <div style="font-size: 13px; font-weight: 800; color: #1e293b;">200</div>
+                            <div id="preset200" style="font-size: 9px; font-weight: 700; color: #1e293b;">Rp 0</div>
+                        </button>
+                        <button onclick="setQuantity(500)" id="presetBtn500" style="background: #ffffff; border: 1px solid #e2e8f0; padding: 8px; border-radius: 12px; text-align: center; cursor: pointer;">
+                            <div style="font-size: 13px; font-weight: 800; color: #1e293b;">500</div>
+                            <div id="preset500" style="font-size: 9px; font-weight: 700; color: #1e293b;">Rp 0</div>
+                        </button>
+                    </div>
+                </div>
+
+                <div>
+                    <label style="font-size: 12px; font-weight: 700; color: #334155; display: block; margin-bottom: 4px;">Atau ketik jumlah sendiri</label>
+                    <input type="number" id="inputQty" oninput="calculateTotal()" placeholder="Contoh: 300" style="width: 100%; border: 1px solid #cbd5e1; padding: 10px 12px; border-radius: 12px; font-size: 13px; font-weight: 700; outline: none;">
+                </div>
+
+                <div>
+                    <label style="font-size: 12px; font-weight: 700; color: #334155; display: block; margin-bottom: 4px;">Link Akun / Username Target</label>
+                    <input type="text" id="targetInput" placeholder="Contoh: @username / link postingan" style="width: 100%; border: 1px solid #cbd5e1; padding: 10px 12px; border-radius: 12px; font-size: 13px; outline: none;">
+                </div>
+
+                <div>
+                    <label style="font-size: 12px; font-weight: 700; color: #334155; display: block; margin-bottom: 4px;">Pilih Metode Pembayaran</label>
+                    <select id="paymentMethod" style="width: 100%; border: 1px solid #cbd5e1; padding: 10px 12px; border-radius: 12px; font-size: 13px; font-weight: 700; background: #fff; outline: none;">
+                        <option value="QRIS">QRIS (All Payment)</option>
+                        <option value="DANA">DANA</option>
+                        <option value="GoPay">GoPay</option>
+                        <option value="OVO">OVO</option>
+                        <option value="SeaBank">SeaBank</option>
+                    </select>
+                </div>
+
+                <div id="modalSummaryBox" style="padding: 12px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <span id="modalSummaryLabel" style="font-size: 11px; display: block;">Kamu pilih</span>
+                        <span id="selectedCountText" style="font-size: 13px; font-weight: 800; color: #0f172a;">50 item</span>
+                    </div>
+                    <span id="totalPrice" style="font-size: 18px; font-weight: 800;">Rp 0</span>
+                </div>
+
+                <button id="modalSubmitBtn" onclick="addToCart()" style="width: 100%; font-size: 13px; font-weight: 800; padding: 12px; border-radius: 12px; border: none; cursor: pointer;">
+                    🛒 Tambah Ke Keranjang & Pesan WA
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL ADMIN -->
+    <div id="adminModal" style="position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); display: none; align-items: center; justify-content: center; z-index: 50; padding: 16px;">
+        <div style="background: #ffffff; width: 100%; max-width: 448px; border-radius: 20px; padding: 20px; max-height: 90vh; overflow-y: auto;">
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f1f5f9; padding-bottom: 10px;">
+                <h3 style="font-size: 14px; font-weight: 800; margin: 0;">Mode Admin Renzy Store</h3>
+                <button onclick="toggleAdminModal()" style="background: #f1f5f9; border: none; width: 28px; height: 28px; border-radius: 50%; cursor: pointer;">✕</button>
+            </div>
+
+            <div id="adminAuth" style="margin-top: 14px; display: flex; flex-direction: column; gap: 10px;">
+                <p style="font-size: 12px; color: #64748b; margin: 0;">Masukkan PIN Admin untuk mengelola harga/layanan.</p>
+                <input type="password" id="adminPin" placeholder="Masukkan PIN Admin" style="border: 1px solid #cbd5e1; padding: 10px; border-radius: 10px; font-size: 13px;">
+                <button id="adminLoginBtn" onclick="loginAdmin()" style="color: white; font-weight: 700; padding: 10px; border-radius: 10px; border: none; cursor: pointer;">Masuk Admin</button>
+            </div>
+
+            <div id="adminPanel" style="display: none; margin-top: 14px; flex-direction: column; gap: 14px;">
+                <div id="adminPanelBox" style="padding: 12px; border-radius: 12px; display: flex; flex-direction: column; gap: 8px;">
+                    <h4 id="adminAddTitle" style="font-size: 12px; font-weight: 800; margin: 0;">Tambah Layanan Baru</h4>
+                    <input type="text" id="newTitle" placeholder="Nama Layanan" style="font-size: 12px; padding: 8px; border: 1px solid #cbd5e1; border-radius: 8px;">
+                    <select id="newCat" style="font-size: 12px; padding: 8px; border: 1px solid #cbd5e1; border-radius: 8px;">
+                        <option value="TikTok">TikTok</option>
+                        <option value="Instagram">Instagram</option>
+                        <option value="WhatsApp">WhatsApp</option>
+                        <option value="Telegram">Telegram</option>
+                    </select>
+                    <input type="text" id="newDesc" placeholder="Deskripsi Layanan" style="font-size: 12px; padding: 8px; border: 1px solid #cbd5e1; border-radius: 8px;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                        <input type="number" id="newPrice" placeholder="Harga Reguler (Rp)" style="font-size: 12px; padding: 8px; border: 1px solid #cbd5e1; border-radius: 8px;">
+                        <input type="number" id="newPricePrem" placeholder="Harga Premium (Rp)" style="font-size: 12px; padding: 8px; border: 1px solid #cbd5e1; border-radius: 8px;">
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                        <input type="number" id="newPer" placeholder="Per Item (10/100)" style="font-size: 12px; padding: 8px; border: 1px solid #cbd5e1; border-radius: 8px;">
+                        <input type="number" id="newMin" placeholder="Minimal Order" style="font-size: 12px; padding: 8px; border: 1px solid #cbd5e1; border-radius: 8px;">
+                    </div>
+                    <button onclick="addService()" style="background: #10b981; color: white; font-weight: 700; padding: 8px; border-radius: 8px; border: none; font-size: 12px; cursor: pointer;">+ Tambah Layanan</button>
+                </div>
+
+                <div>
+                    <h4 style="font-size: 12px; font-weight: 700; color: #334155; margin: 0 0 8px 0;">Daftar Layanan</h4>
+                    <div id="adminServicesList" style="display: flex; flex-direction: column; gap: 6px; max-height: 160px; overflow-y: auto;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPT JAVASCRIPT -->
+    <script>
+        const logoTikTok = "https://cdn.phototourl.com/member/2026-10-25-fb6aff63-1e41-4620-a9a5-4d5e4ff63852.jpg";
+        const logoIG = "https://cdn.phototourl.com/member/2026-10-25-088e6b7f-49f5-432d-9486-b29549e04e7d.jpg";
+        const logoWA = "https://cdn.phototourl.com/member/2026-10-25-f6140907-34f1-4dcd-9ff7-37af67c3623a.jpg";
+        const logoTele = "https://cdn.phototourl.com/member/2026-10-25-25cdab83-7ff5-45fa-be9a-ec175eb4787d.jpg";
+
+        const defaultServices = [
+            // TIKTOK
+            { id: 1, title: 'Followers TikTok Luar', category: 'TikTok', desc: 'Followers dari luar Indonesia (Low Drop, presentase turunnya kecil).', price: 800, pricePrem: 1500, per: 10, min: 50, iconImg: logoTikTok },
+            { id: 2, title: 'Followers TikTok Indo', category: 'TikTok', desc: 'Followers Indonesia dari orang asli/buzzer (permanen).', price: 1000, pricePrem: 2000, per: 10, min: 50, iconImg: logoTikTok },
+            { id: 3, title: 'Likes TikTok Luar', category: 'TikTok', desc: 'Menambah likes pada video TikTok dari layanan luar Indonesia.', price: 900, pricePrem: 1500, per: 100, min: 100, iconImg: logoTikTok },
+            { id: 4, title: 'Likes TikTok Indo', category: 'TikTok', desc: 'Likes dari Indonesia dengan layanan orang asli/buzzer (permanen).', price: 10000, pricePrem: 15000, per: 100, min: 50, iconImg: logoTikTok },
+            { id: 5, title: 'Views TikTok', category: 'TikTok', desc: 'Menambah tayangan pada video TikTok, (no drop, presentase turun kecil/tidak bakal turun).', price: 2000, pricePrem: 3500, per: 1000, min: 500, iconImg: logoTikTok },
+            { id: 6, title: 'Komentar TikTok Indo', category: 'TikTok', desc: 'Komentar dari Indonesia dengan layanan orang asli/buzzer (permanen).', price: 4000, pricePrem: 7000, per: 10, min: 10, iconImg: logoTikTok },
+            { id: 7, title: 'Komentar TikTok Luar', category: 'TikTok', desc: 'Komentar TikTok dari layanan luar Indonesia.', price: 2500, pricePrem: 4500, per: 10, min: 10, iconImg: logoTikTok },
+
+            // INSTAGRAM
+            { id: 8, title: 'Followers IG Luar', category: 'Instagram', desc: 'Followers Instagram dari luar Indonesia (low drop, presentase turun sangat kecil).', price: 500, pricePrem: 1000, per: 10, min: 50, iconImg: logoIG },
+            { id: 9, title: 'Followers IG Indo', category: 'Instagram', desc: 'Followers Indonesia dari orang asli/buzzer (permanen).', price: 800, pricePrem: 1500, per: 10, min: 50, iconImg: logoIG },
+            { id: 10, title: 'Likes Instagram Luar', category: 'Instagram', desc: 'Menambah likes pada foto, video, atau reels Instagram dari layanan luar Indonesia (HQ, kualitas bagus).', price: 600, pricePrem: 1200, per: 100, min: 100, iconImg: logoIG },
+            { id: 11, title: 'Likes Instagram Indo', category: 'Instagram', desc: 'Likes Indonesia dari orang asli/buzzer (permanen).', price: 8000, pricePrem: 12000, per: 100, min: 50, iconImg: logoIG },
+            { id: 12, title: 'Views Instagram', category: 'Instagram', desc: 'Menambah tayangan pada video atau reels Instagram.', price: 300, pricePrem: 800, per: 100, min: 500, iconImg: logoIG },
+            { id: 13, title: 'Komentar Instagram Luar', category: 'Instagram', desc: 'Komentar Instagram dari layanan luar Indonesia.', price: 800, pricePrem: 1500, per: 10, min: 10, iconImg: logoIG },
+            { id: 14, title: 'Komentar Instagram Indo', category: 'Instagram', desc: 'Komentar Indonesia dari orang asli/buzzer (permanen).', price: 4000, pricePrem: 7000, per: 10, min: 10, iconImg: logoIG },
+            { id: 15, title: 'Repost Instagram', category: 'Instagram', desc: 'Menambah repost pada konten Instagram.', price: 300, pricePrem: 600, per: 10, min: 50, iconImg: logoIG },
+
+            // WHATSAPP
+            { id: 16, title: 'Followers Saluran WA', category: 'WhatsApp', desc: 'Menambah jumlah followers pada saluran WhatsApp.', price: 400, pricePrem: 900, per: 10, min: 10, iconImg: logoWA },
+            { id: 17, title: 'React Saluran WA', category: 'WhatsApp', desc: 'Menambah reaksi pada pesan di saluran WhatsApp.', price: 400, pricePrem: 900, per: 10, min: 10, iconImg: logoWA },
+            { id: 18, title: 'Vote Saluran WA', category: 'WhatsApp', desc: 'Membantu menambah vote pada polling saluran WhatsApp.', price: 400, pricePrem: 900, per: 10, min: 10, iconImg: logoWA },
+
+            // TELEGRAM
+            { id: 19, title: 'Telegram Member Grup/Channel Luar', category: 'Telegram', desc: 'Member grup atau channel Telegram dari luar Indonesia, (low drop, presentase turun sangat kecil/tidak bakal turun).', price: 800, pricePrem: 1500, per: 100, min: 50, iconImg: logoTele },
+            { id: 20, title: 'Telegram Member Grup/Channel Indo', category: 'Telegram', desc: 'Member grup atau channel Telegram Indonesia dari orang asli/buzzer (permanen).', price: 12000, pricePrem: 20000, per: 10, min: 50, iconImg: logoTele }
+        ];
+
+        let services = JSON.parse(localStorage.getItem('renzystore_services')) || defaultServices;
+        let cart = JSON.parse(localStorage.getItem('renzystore_cart')) || [];
+        let selectedService = null;
+        let currentQty = 0;
+        let currentFilter = 'TikTok';
+        let currentMode = 'Reguler';
+
+        function updateDynamicTheme() {
+            const isReg = currentMode === 'Reguler';
+            const primaryColor = isReg ? '#2563eb' : '#A02CC9';
+            const primaryBg = isReg ? '#eff6ff' : '#f3e8ff';
+            const primaryBorder = isReg ? '#bfdbfe' : '#d8b4fe';
+
+            // Logo Text
+            const logoText = document.getElementById('logoText');
+            logoText.style.color = primaryColor;
+
+            // Tombol Tanya AI
+            const btnAi = document.getElementById('btnAi');
+            btnAi.style.background = primaryColor;
+
+            // Nomor langkah 1-4
+            ['stepNum1', 'stepNum2', 'stepNum3', 'stepNum4'].forEach(id => {
+                document.getElementById(id).style.background = primaryColor;
+            });
+
+            // Badge welcome
+            const wBadge = document.getElementById('welcomeBadge');
+            wBadge.style.color = primaryColor;
+            wBadge.style.background = primaryBg;
+
+            // Chip Pill Aktif
+            const activeChip = document.querySelector('.chip-pill.active');
+            if(activeChip) {
+                activeChip.style.backgroundColor = primaryColor;
+                activeChip.style.borderColor = primaryColor;
+                activeChip.style.color = '#ffffff';
+            }
+
+            // Cart & Drawer elements
+            const cartBtn = document.getElementById('cartFloatBtn');
+            cartBtn.style.color = primaryColor;
+
+            const drawerIcon = document.getElementById('drawerIconBox');
+            drawerIcon.style.background = primaryBg;
+            drawerIcon.style.color = primaryColor;
+
+            const checkoutBtn = document.getElementById('checkoutBtn');
+            checkoutBtn.style.background = primaryColor;
+            checkoutBtn.style.boxShadow = `0 4px 12px ${isReg ? 'rgba(37, 99, 235, 0.3)' : 'rgba(160, 44, 201, 0.3)'}`;
+
+            // AI Modal icon & send button
+            const aiIconBox = document.getElementById('aiModalIconBox');
+            aiIconBox.style.background = primaryBg;
+            aiIconBox.style.color = primaryColor;
+            document.getElementById('aiSendBtn').style.background = primaryColor;
+
+            // Admin login button & panel
+            document.getElementById('adminLoginBtn').style.background = primaryColor;
+            const adminBox = document.getElementById('adminPanelBox');
+            adminBox.style.background = primaryBg;
+            adminBox.style.border = `1px solid ${primaryBorder}`;
+            document.getElementById('adminAddTitle').style.color = isReg ? '#1e40af' : '#6b21a8';
+        }
+
+        function closeWelcomeModal() {
+            document.getElementById('welcomeModal').style.display = 'none';
+            document.getElementById('modeModal').style.display = 'flex';
+        }
+
+        function openModeModal() {
+            document.getElementById('modeModal').style.display = 'flex';
+        }
+
+        function closeModeModal() {
+            document.getElementById('modeModal').style.display = 'none';
+        }
+
+        function selectMode(mode) {
+            currentMode = mode;
+            const btn = document.getElementById('modeButton');
+            if(mode === 'Premium') {
+                btn.className = 'chip-mode-premium';
+                btn.innerHTML = `👑 Mode Premium <span class="badge-ganti">Ganti</span>`;
+            } else {
+                btn.className = 'chip-mode-reguler';
+                btn.innerHTML = `⚡ Mode Reguler <span class="badge-ganti">Ganti</span>`;
+            }
+            closeModeModal();
+            updateDynamicTheme();
+            renderServices(currentFilter);
+            if(document.getElementById('cartDrawer').style.right === '0px') {
+                renderCartItems();
+            }
+        }
+
+        function saveServices() {
+            localStorage.setItem('renzystore_services', JSON.stringify(services));
+            renderServices(currentFilter);
+        }
+
+        function renderServices(filter) {
+            currentFilter = filter;
+            const container = document.getElementById('servicesList');
+            container.innerHTML = '';
+
+            const filtered = services.filter(s => s.category.toLowerCase() === filter.toLowerCase());
+            document.getElementById('serviceCountText').innerText = `${filtered.length} layanan tersedia (${currentMode})`;
+
+            if(filtered.length === 0) {
+                container.innerHTML = `<div style="text-align: center; padding: 24px; color: #94a3b8; font-size: 12px; background: white; border-radius: 16px;">Tidak ada layanan untuk kategori ini.</div>`;
+                return;
+            }
+
+            const isReg = currentMode === 'Reguler';
+            const primaryColor = isReg ? '#2563eb' : '#A02CC9';
+            const primaryBg = isReg ? '#eff6ff' : '#f3e8ff';
+            const primaryBorder = isReg ? '#bfdbfe' : '#d8b4fe';
+
+            filtered.forEach(s => {
+                const activePrice = currentMode === 'Premium' ? (s.pricePrem || Math.round(s.price * 1.5)) : s.price;
+                const card = document.createElement('div');
+                
+                let iconContent = '';
+                if(s.iconImg) {
+                    iconContent = `<img src="${s.iconImg}" alt="icon" style="width: 22px; height: 22px; object-fit: contain; border-radius: 50%;">`;
+                } else {
+                    iconContent = s.icon || '⚡';
+                }
+
+                card.style.cssText = `background: linear-gradient(135deg, #ffffff 0%, ${primaryBg} 100%); border: 1px solid ${primaryBorder}; border-radius: 16px; padding: 14px; display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; box-shadow: 0 2px 6px ${isReg ? 'rgba(37, 99, 235, 0.06)' : 'rgba(160, 44, 201, 0.06)'};`;
+                card.innerHTML = `
+                    <div style="display: flex; gap: 12px; align-items: flex-start; flex: 1; min-width: 0;">
+                        <div style="width: 40px; height: 40px; background: ${primaryBg}; border: 1px solid ${primaryBorder}; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; overflow: hidden;">${iconContent}</div>
+                        <div style="flex: 1; min-width: 0;">
+                            <h3 style="font-size: 13px; font-weight: 800; color: #0f172a; margin: 0 0 2px 0;">${s.title} <span style="font-size: 9px; background: ${primaryBg}; color: ${primaryColor}; border: 1px solid ${primaryBorder}; padding: 2px 6px; border-radius: 4px;">${currentMode}</span></h3>
+                            <p style="font-size: 11px; color: #64748b; margin: 0; line-height: 1.3;">${s.desc}</p>
+                            <div style="font-size: 13px; font-weight: 800; color: ${primaryColor}; margin-top: 6px;">
+                                Rp ${activePrice.toLocaleString('id-ID')} <span style="font-size: 10px; color: #94a3b8; font-weight: 400;">/${s.per} item</span>
+                            </div>
+                            <div style="font-size: 10px; color: #94a3b8; margin-top: 2px;">Minimal ${s.min} item</div>
+                        </div>
+                    </div>
+                    <button onclick="openOrderModal(${s.id})" style="background: ${primaryColor}; color: #ffffff; font-size: 13px; font-weight: 800; padding: 8px 20px; border-radius: 12px; border: none; cursor: pointer; flex-shrink: 0; box-shadow: 0 2px 6px ${isReg ? 'rgba(37, 99, 235, 0.3)' : 'rgba(160, 44, 201, 0.3)'};">Beli</button>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function filterCategory(cat, btn) {
+            document.querySelectorAll('.chip-pill').forEach(b => {
+                b.classList.remove('active');
+                b.style.backgroundColor = '#ffffff';
+                b.style.color = '#334155';
+                b.style.borderColor = '#e2e8f0';
+            });
+            btn.classList.add('active');
+            const primaryColor = currentMode === 'Reguler' ? '#2563eb' : '#A02CC9';
+            btn.style.backgroundColor = primaryColor;
+            btn.style.color = '#ffffff';
+            btn.style.borderColor = primaryColor;
+            renderServices(cat);
+        }
+
+        // FUNGSI KERANJANG & DRAWER SLIDE DARI KANAN
+        function toggleCartDrawer() {
+            const drawer = document.getElementById('cartDrawer');
+            const overlay = document.getElementById('cartDrawerOverlay');
+            const isOpen = drawer.style.right === '0px';
+
+            if(isOpen) {
+                drawer.style.right = '-100%';
+                overlay.style.display = 'none';
+            } else {
+                drawer.style.right = '0px';
+                overlay.style.display = 'block';
+                renderCartItems();
+            }
+        }
+
+        document.getElementById('cartDrawerOverlay').onclick = function() {
+            toggleCartDrawer();
+        };
+
+        function renderCartItems() {
+            const container = document.getElementById('cartItemsList');
+            container.innerHTML = '';
+
+            const badge = document.getElementById('cartBadge');
+            const miniBadge = document.getElementById('drawerBadgeMini');
+            document.getElementById('drawerItemCount').innerText = `${cart.length} layanan dipilih`;
+
+            if(cart.length === 0) {
+                badge.style.display = 'none';
+                miniBadge.style.display = 'none';
+                container.innerHTML = `<div style="text-align: center; padding: 40px 20px; color: #94a3b8; font-size: 13px;">Keranjang belanja masih kosong.</div>`;
+                document.getElementById('cartTotalPrice').innerText = 'Rp 0';
+                return;
+            }
+
+            badge.style.display = 'flex';
+            badge.innerText = cart.length;
+            miniBadge.style.display = 'flex';
+            miniBadge.innerText = cart.length;
+
+            let totalSum = 0;
+            const primaryColor = currentMode === 'Reguler' ? '#2563eb' : '#A02CC9';
+            const primaryBg = currentMode === 'Reguler' ? '#eff6ff' : '#f3e8ff';
+
+            cart.forEach((item, index) => {
+                totalSum += item.totalPrice;
+                
+                let iconContent = '';
+                if(item.iconImg) {
+                    iconContent = `<img src="${item.iconImg}" alt="icon" style="width: 20px; height: 20px; object-fit: contain; border-radius: 50%;">`;
+                } else {
+                    iconContent = item.icon || '⚡';
+                }
+
+                container.innerHTML += `
+                    <div style="display: flex; align-items: flex-start; justify-content: space-between; padding-bottom: 14px; border-bottom: 1px dashed #e2e8f0; gap: 10px;">
+                        <div style="display: flex; gap: 10px; align-items: flex-start; flex: 1; min-width: 0;">
+                            <div style="font-size: 16px; background: ${primaryBg}; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 10px; flex-shrink: 0; color: ${primaryColor}; overflow: hidden;">${iconContent}</div>
+                            <div style="flex: 1; min-width: 0;">
+                                <h4 style="font-size: 13px; font-weight: 800; color: #0f172a; margin: 0 0 2px 0;">${item.title} (${item.mode})</h4>
+                                <div style="font-size: 11px; color: #64748b; margin: 0;">${item.qty} item</div>
+                                <div style="font-size: 11px; font-weight: 700; color: #0f172a; margin-top: 4px;">Rp ${item.totalPrice.toLocaleString('id-ID')}</div>
+                            </div>
+                        </div>
+                        <button onclick="removeFromCart(${index})" style="background: none; border: none; color: #94a3b8; font-size: 16px; cursor: pointer; padding: 4px;">✕</button>
+                    </div>
+                `;
+            });
+
+            document.getElementById('cartTotalPrice').innerText = `Rp ${totalSum.toLocaleString('id-ID')}`;
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            localStorage.setItem('renzystore_cart', JSON.stringify(cart));
+            renderCartItems();
+        }
+
+        function addToCart() {
+            const target = document.getElementById('targetInput').value;
+            const paymentMethod = document.getElementById('paymentMethod').value;
+
+            if(!target) {
+                alert('Silakan masukkan Link Akun atau Username target pesanan Anda!');
+                return;
+            }
+            if(currentQty < selectedService.min) {
+                alert(`Minimal pemesanan untuk layanan ini adalah ${selectedService.min}`);
+                return;
+            }
+
+            const total = Math.round((currentQty / selectedService.per) * selectedService.activePrice);
+            
+            cart.push({
+                title: selectedService.title,
+                mode: currentMode,
+                qty: currentQty,
+                target: target,
+                payment: paymentMethod,
+                totalPrice: total,
+                iconImg: selectedService.iconImg,
+                icon: selectedService.icon
+            });
+
+            localStorage.setItem('renzystore_cart', JSON.stringify(cart));
+            closeModal();
+            toggleCartDrawer();
+        }
+
+        function checkoutCart() {
+            if(cart.length === 0) {
+                alert('Keranjang belanja masih kosong!');
+                return;
+            }
+
+            let totalAll = 0;
+            let text = `✨ *Pesanan Renzy Store* ✨\n\n`;
+
+            cart.forEach((item, idx) => {
+                totalAll += item.totalPrice;
+                text += `*${idx + 1}. ${item.title} (${item.mode})*\n` +
+                        `• Jumlah: ${item.qty}\n` +
+                        `• Target: ${item.target}\n` +
+                        `• Subtotal: Rp ${item.totalPrice.toLocaleString('id-ID')}\n\n`;
+            });
+
+            text += `💳 *Metode Pembayaran:* ${cart[0].payment}\n` +
+                    `💰 *Total Pembayaran:* Rp ${totalAll.toLocaleString('id-ID')}\n\n` +
+                    `Mohon diproses, terima kasih!`;
+
+            const waNumber = "6283842227858";
+            const waURL = `https://api.whatsapp.com/send?phone=${waNumber}&text=${encodeURIComponent(text)}`;
+            window.open(waURL, '_blank');
+        }
+
+        function toggleAiModal() {
+            const modal = document.getElementById('aiModal');
+            modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        function handleAiEnter(e) {
+            if (e.key === 'Enter') sendAiMessage();
+        }
+
+        function sendAiMessage() {
+            const input = document.getElementById('aiInput');
+            const text = input.value.trim();
+            if(!text) return;
+
+            const primaryColor = currentMode === 'Reguler' ? '#2563eb' : '#A02CC9';
+            const chatBox = document.getElementById('aiChatBox');
+            chatBox.innerHTML += `<div style="background: ${primaryColor}; color: white; padding: 10px 14px; border-radius: 14px; font-size: 12px; max-width: 85%; align-self: flex-end;">${text}</div>`;
+            input.value = '';
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            setTimeout(() => {
+                let reply = `Halo! Anda dapat menambahkan beberapa layanan ke keranjang, lalu mengelolanya atau menghapusnya sebelum melakukan pembayaran via WhatsApp.`;
+                const lower = text.toLowerCase();
+
+                if(lower.includes('proses') || lower.includes('lama')) {
+                    reply = "Proses pengerjaan memakan waktu 1x24 jam tergantung kondisi server.";
+                } else if(lower.includes('keranjang') || lower.includes('hapus')) {
+                    reply = "Anda bisa klik ikon keranjang di pojok kanan bawah untuk melihat daftar pesanan atau menghapusnya menggunakan tombol silang (×).";
+                }
+
+                chatBox.innerHTML += `<div style="background: #f1f5f9; padding: 10px 14px; border-radius: 14px; font-size: 12px; color: #334155; max-width: 85%; align-self: flex-start;">${reply}</div>`;
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }, 600);
+        }
+
+        function openOrderModal(id) {
+            selectedService = services.find(s => s.id === id);
+            if(!selectedService) return;
+
+            const activePrice = currentMode === 'Premium' ? (selectedService.pricePrem || Math.round(selectedService.price * 1.5)) : selectedService.price;
+            selectedService.activePrice = activePrice;
+
+            document.getElementById('modalTitle').innerText = `${selectedService.title} (${currentMode})`;
+            
+            const modalIconContainer = document.getElementById('modalIconContainer');
+            if(selectedService.iconImg) {
+                modalIconContainer.innerHTML = `<img src="${selectedService.iconImg}" alt="icon" style="width: 22px; height: 22px; object-fit: contain; border-radius: 50%;">`;
+            } else {
+                modalIconContainer.innerHTML = selectedService.icon || '⚡';
+            }
+
+            const modalRate = document.getElementById('modalRate');
+            const modalSummaryBox = document.getElementById('modalSummaryBox');
+            const modalSummaryLabel = document.getElementById('modalSummaryLabel');
+            const totalPriceEl = document.getElementById('totalPrice');
+            const modalSubmitBtn = document.getElementById('modalSubmitBtn');
+            const primaryColor = currentMode === 'Reguler' ? '#2563eb' : '#A02CC9';
+            const primaryBg = currentMode === 'Reguler' ? '#eff6ff' : '#f3e8ff';
+            const primaryBorder = currentMode === 'Reguler' ? '#bfdbfe' : '#d8b4fe';
+
+            modalRate.style.cssText = `font-size: 11px; font-weight: 700; color: ${primaryColor}; background: ${primaryBg}; border: 1px solid ${primaryBorder}; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-top: 4px;`;
+            modalSummaryBox.style.cssText = `background: linear-gradient(135deg, #ffffff 0%, ${primaryBg} 100%); border: 1px solid ${primaryBorder}; padding: 12px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center;`;
+            modalSummaryLabel.style.color = primaryColor;
+            totalPriceEl.style.color = primaryColor;
+            modalSubmitBtn.style.background = primaryColor;
+            modalSubmitBtn.style.color = '#ffffff';
+            modalSubmitBtn.style.boxShadow = `0 2px 6px ${currentMode === 'Reguler' ? 'rgba(37, 99, 235, 0.4)' : 'rgba(160, 44, 201, 0.4)'}`;
+
+            document.getElementById('modalRate').innerText = `Rp ${activePrice.toLocaleString('id-ID')} / ${selectedService.per} item`;
+            
+            document.getElementById('preset50').innerText = `Rp ${Math.round((50 / selectedService.per) * activePrice).toLocaleString('id-ID')}`;
+            document.getElementById('preset100').innerText = `Rp ${Math.round((100 / selectedService.per) * activePrice).toLocaleString('id-ID')}`;
+            document.getElementById('preset200').innerText = `Rp ${Math.round((200 / selectedService.per) * activePrice).toLocaleString('id-ID')}`;
+            document.getElementById('preset500').innerText = `Rp ${Math.round((500 / selectedService.per) * activePrice).toLocaleString('id-ID')}`;
+
+            setQuantity(selectedService.min || 50);
+            document.getElementById('orderModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('orderModal').style.display = 'none';
+        }
+
+        function setQuantity(qty) {
+            document.getElementById('inputQty').value = qty;
+            const primaryColor = currentMode === 'Reguler' ? '#2563eb' : '#A02CC9';
+            const primaryBg = currentMode === 'Reguler' ? '#eff6ff' : '#f3e8ff';
+            const primaryBorder = currentMode === 'Reguler' ? '#bfdbfe' : '#d8b4fe';
+            
+            [50, 100, 200, 500].forEach(val => {
+                const btn = document.getElementById(`presetBtn${val}`);
+                if(btn) {
+                    if(val === qty) {
+                        btn.style.border = `1.5px solid ${primaryColor}`;
+                        btn.style.background = `linear-gradient(135deg, #ffffff 0%, ${primaryBg} 100%)`;
+                    } else {
+                        btn.style.border = `1px solid ${primaryBorder}`;
+                        btn.style.background = `linear-gradient(135deg, #ffffff 0%, ${primaryBg} 100%)`;
+                    }
+                }
+            });
+
+            calculateTotal();
+        }
+
+        function calculateTotal() {
+            const input = document.getElementById('inputQty');
+            let qty = parseInt(input.value) || 0;
+            currentQty = qty;
+
+            const total = (qty / selectedService.per) * selectedService.activePrice;
+            document.getElementById('totalPrice').innerText = `Rp ${Math.round(total).toLocaleString('id-ID')}`;
+            document.getElementById('selectedCountText').innerText = `${qty} item`;
+        }
+
+        function toggleAdminModal() {
+            const modal = document.getElementById('adminModal');
+            modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+            document.getElementById('adminPin').value = '';
+        }
+
+        function loginAdmin() {
+            const pin = document.getElementById('adminPin').value;
+            if(pin === 'zullfan ganteng 1102') {
+                document.getElementById('adminAuth').style.display = 'none';
+                document.getElementById('adminPanel').style.display = 'flex';
+                renderAdminList();
+            } else {
+                alert('PIN Salah!');
+                document.getElementById('adminPin').value = '';
+            }
+        }
+
+        function renderAdminList() {
+            const container = document.getElementById('adminServicesList');
+            container.innerHTML = '';
+            services.forEach((s, idx) => {
+                container.innerHTML += `
+                    <div style="display: flex; justify-content: space-between; align-items: center; font-size: 11px; padding: 8px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px;">
+                        <div><strong>${s.title}</strong> - Reg: Rp ${s.price} | Prem: Rp ${s.pricePrem || s.price}</div>
+                        <button onclick="deleteService(${idx})" style="color: #ef4444; border: none; background: none; font-weight: 700; cursor: pointer;">Hapus</button>
+                    </div>
+                `;
+            });
+        }
+
+        function addService() {
+            const title = document.getElementById('newTitle').value;
+            const category = document.getElementById('newCat').value;
+            const desc = document.getElementById('newDesc').value;
+            const price = parseInt(document.getElementById('newPrice').value);
+            const pricePrem = parseInt(document.getElementById('newPricePrem').value);
+            const per = parseInt(document.getElementById('newPer').value);
+            const min = parseInt(document.getElementById('newMin').value);
+
+            if(!title || !price || !per) {
+                alert('Mohon lengkapi formulir minimal nama, harga reguler, dan per item!');
+                return;
+            }
+
+            const iconsMap = { TikTok: logoTikTok, Instagram: logoIG, WhatsApp: logoWA, Telegram: logoTele };
+
+            services.push({
+                id: Date.now(),
+                title, category, desc, price, pricePrem: pricePrem || Math.round(price * 1.5), per, min: min || per,
+                iconImg: iconsMap[category] || '',
+                icon: '⚡'
+            });
+
+            saveServices();
+            renderAdminList();
+            alert('Layanan berhasil ditambahkan!');
+        }
+
+        function deleteService(idx) {
+            if(confirm('Hapus layanan ini?')) {
+                services.splice(idx, 1);
+                saveServices();
+                renderAdminList();
+            }
+        }
+
+        updateDynamicTheme();
+        renderServices('TikTok');
+        if(cart.length > 0) {
+            document.getElementById('cartBadge').style.display = 'flex';
+            document.getElementById('cartBadge').innerText = cart.length;
+        }
+    </script>
+</body>
+</html>
